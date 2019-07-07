@@ -1,14 +1,18 @@
 FROM       ubuntu:16.04
 MAINTAINER siya Lai <siya891202@gmail.com> <13661189714@163.com>
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
 RUN apt-get update
-RUN apt-get -y install openssh-server vim libncurses5-dev && \
-    apt-get -y install ncurses-dev libreadline6-dev lua5.1-0-dev ruby ruby-dev python-dev && \
-    apt-get -y install libyaml-cpp-dev zlib1g.dev && \
-    apt-get -y install gcc git curl tzdata && \
-    apt-get -y install language-pack-zh-hant-base language-pack-zh-hans-base
+RUN apt-get install -y apt-utils
+RUN apt-get install -y software-properties-common python-software-properties && LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && \
+    apt-get install -y apt-transport-https zip mcrypt && \
+    apt-get install -y libpq-dev libfreetype6-dev libpng12-dev libmcrypt-dev && \
+    apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev openssh-server vim libncurses5-dev && \
+    apt-get install -y ncurses-dev libreadline6-dev lua5.1-0-dev ruby ruby-dev python-dev libyaml-cpp-dev zlib1g.dev && \
+    apt-get install -y curl tzdata && \
+    apt-get install -y language-pack-zh-hant-base language-pack-zh-hans-base
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo 'root:root' |chpasswd
 
@@ -31,4 +35,3 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 22
-
