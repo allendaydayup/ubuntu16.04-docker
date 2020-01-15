@@ -6,7 +6,7 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 
 RUN apt-get update
 RUN apt-get install -y apt-utils
-RUN apt-get install -y software-properties-common python-software-properties && LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && \
+RUN apt-get install -y net-tools software-properties-common python-software-properties && LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php && \
     apt-get install -y apt-transport-https zip mcrypt && \
     apt-get install -y libpq-dev libfreetype6-dev libpng12-dev libmcrypt-dev && \
     apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev openssh-server vim libncurses5-dev && \
